@@ -10,6 +10,8 @@ use Laravel\Fortify\Rules\Password;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class UserController extends Controller
@@ -55,7 +57,7 @@ class UserController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'required','email',
+                'email' => 'email|required',
                 'password' => 'required',
             ]);
 
@@ -93,6 +95,7 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $data = $request->all();
+
         $user = Auth::user();
         $user->update($data);
         
