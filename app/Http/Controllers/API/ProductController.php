@@ -23,40 +23,40 @@ class ProductController extends Controller
         if ($id) {
             $product = Product::with(['category', 'galleries'])->find($id);
 
-            if ($product) {
+            if ($product) 
                 return ResponseFormatter::success(
                     $product,
                     'Data produk berhasil diambil'
                 );
-            } else {
+             else 
                 return ResponseFormatter::error(
                     null,
                     'Data produk tidak ditemukan',
                     404
                 );
-            }
+            
         }
 
         $product = Product::with(['category', 'galleries']);
 
-        if ($name) {
+        if ($name) 
             $product->where('name', 'like', '%' . $name . '%');
-        }
-        if ($description) {
+        
+        if ($description) 
             $product->where('description', 'like', '%' . $description . '%');
-        }
-        if ($tags) {
+        
+        if ($tags) 
             $product->where('tags', 'like', '%' . $tags . '%');
-        }
-        if ($price_from) {
+        
+        if ($price_from) 
             $product->where('price', '>=', $price_from);
-        }
-        if ($price_to) {
+        
+        if ($price_to) 
             $product->where('price', '<=', $price_to);
-        }
-        if ($categories) {
-            $product->where('categories', $categories);
-        }
+        
+        if ($categories) 
+            $product->where('categories_id', $categories);
+        
 
         return ResponseFormatter::success(
             $product->paginate($limit),

@@ -14,8 +14,6 @@ use App\Models\Transaction;
 class User extends Authenticatable
 {
     use HasApiTokens;
-
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
@@ -30,9 +28,9 @@ class User extends Authenticatable
         'name',
         'email',
         'username',
-        'phone',
         'roles',
         'password',
+        'phone'
     ];
 
     /**
@@ -65,7 +63,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            
         ];
     }
 
